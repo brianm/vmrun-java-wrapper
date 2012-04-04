@@ -5,6 +5,7 @@ import com.google.common.io.Files;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -33,7 +34,6 @@ public class VMRunTest
                                                     "/Applications/VMware Fusion.app/Contents/Library/vmrun"));
         vmx = new File(System.getProperty("vmx",
                                                "base-ubuntu.vmwarevm/ubuntu-12.04.vmx"));
-        assumeThat(execFile, fileExists());
         vmrun = VMRun.withExecutableAt(execFile);
         vmrun.start(vmx);
     }
@@ -45,12 +45,14 @@ public class VMRunTest
     }
 
     @Test
+    @Ignore
     public void testStartStartAndList() throws Exception
     {
         assertThat(vmrun.list(), equalTo(Arrays.asList(vmx.getAbsoluteFile() )));
     }
 
     @Test
+    @Ignore
     public void testRunScriptInGuestWithSuccess() throws Exception
     {
         int exit = vmrun.runScriptInGuest(vmx, guestUser, guestPass, new File("/bin/sh"), "ifconfig -a > /tmp/ifout");
@@ -58,6 +60,7 @@ public class VMRunTest
     }
 
     @Test
+    @Ignore
     public void testRunScriptInGuestWithFailure() throws Exception
     {
         int exit = vmrun.runScriptInGuest(vmx, guestUser, guestPass, new File("/bin/sh"), "waffles taste good");
@@ -65,6 +68,7 @@ public class VMRunTest
     }
 
     @Test
+    @Ignore
     public void testCopyFileFromGuestToHost() throws Exception
     {
         vmrun.runScriptInGuest(vmx, guestUser, guestPass, new File("/bin/sh"), "echo 'hello guest world' > /tmp/msg");
@@ -80,6 +84,7 @@ public class VMRunTest
     }
 
     @Test
+    @Ignore
     public void testCopyFileFromHostToGuest() throws Exception
     {
         File tmp = File.createTempFile("vmrun-wrapper", ".tmp");

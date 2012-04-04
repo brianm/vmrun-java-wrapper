@@ -2,6 +2,7 @@ package org.skife.vmware;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.regex.Matcher;
@@ -31,6 +32,7 @@ public class GuestTest
     }
 
     @Test
+    @Ignore
     public void testGetStandardOutFromScript() throws Exception
     {
         ProcessResult pr = guest.sh("echo 'hello guest!'");
@@ -38,6 +40,7 @@ public class GuestTest
     }
 
     @Test
+    @Ignore
     public void testGetStandardErrFromScript() throws Exception
     {
         ProcessResult pr = guest.sh("echo 'hello guest!' > /dev/stderr");
@@ -45,6 +48,7 @@ public class GuestTest
     }
 
     @Test
+    @Ignore
     public void testFindIpAddress() throws Exception
     {
         String line = readFirstLine(guest.sh("ifconfig | grep 'inet addr' | egrep -v '127.0.0.1'").getStdoutSupplier());
