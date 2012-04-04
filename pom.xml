@@ -46,12 +46,6 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.github.jnr</groupId>
-            <artifactId>jnr-ffi</artifactId>
-            <version>0.6.0</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>11.0.1</version>

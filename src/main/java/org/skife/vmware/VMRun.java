@@ -5,7 +5,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterators;
 import com.google.common.io.CharStreams;
-import jnr.ffi.Library;
 
 import javax.annotation.Nullable;
 import java.io.ByteArrayInputStream;
@@ -19,8 +18,6 @@ import static org.skife.vmware.ProcessResult.run;
 
 public class VMRun
 {
-    private static final LibC C = Library.loadLibrary("c", LibC.class);
-
     private final File vmrun;
 
     private VMRun(File vmrun)
