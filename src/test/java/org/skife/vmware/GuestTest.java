@@ -17,7 +17,7 @@ public class GuestTest
 {
     private static Guest guest;
 
-    @BeforeClass
+//    @BeforeClass
     public static void setUp() throws Exception
     {
         guest = VMRun.withExecutableAt("/Applications/VMware Fusion.app/Contents/Library/vmrun")
@@ -25,7 +25,7 @@ public class GuestTest
         guest.start();
     }
 
-    @AfterClass
+//    @AfterClass
     public static void tearDown() throws Exception
     {
         guest.stop();

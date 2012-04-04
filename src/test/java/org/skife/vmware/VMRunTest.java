@@ -3,7 +3,6 @@ package org.skife.vmware;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -13,9 +12,7 @@ import java.util.Arrays;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assume.assumeThat;
 import static org.skife.vmware.MoreMatchers.fileContentsEqual;
-import static org.skife.vmware.MoreMatchers.fileExists;
 
 public class VMRunTest
 {
@@ -24,7 +21,7 @@ public class VMRunTest
     private static String guestUser;
     private static String guestPass;
 
-    @BeforeClass
+//    @BeforeClass
     public static void setUp() throws Exception
     {
         guestUser = System.getProperty("guest-user", "atlas");
@@ -38,7 +35,7 @@ public class VMRunTest
         vmrun.start(vmx);
     }
 
-    @AfterClass
+//    @AfterClass
     public static void tearDown() throws Exception
     {
         vmrun.stop(vmx);
