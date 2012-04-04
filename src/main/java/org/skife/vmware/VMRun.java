@@ -30,10 +30,15 @@ public class VMRun
         return new VMRun(executable);
     }
 
-    public Guest start(File vmx) throws IOException, InterruptedException
+    public void start(File vmx) throws IOException, InterruptedException
     {
         run(vmrun.getAbsolutePath(), "start", vmx.getAbsolutePath(), "nogui").explodeOnError();
-        return new Guest(this, vmx);
+    }
+
+
+    public Guest createGuest(File vmx, String guestUser, String guestPass)
+    {
+        return new Guest(this, vmx, guestUser, guestPass);
     }
 
     public void stop(File vmx) throws IOException, InterruptedException

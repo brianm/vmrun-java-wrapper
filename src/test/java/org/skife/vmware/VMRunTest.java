@@ -1,7 +1,6 @@
 package org.skife.vmware;
 
 import com.google.common.base.Charsets;
-import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
 import org.junit.Before;
 import org.junit.Test;
