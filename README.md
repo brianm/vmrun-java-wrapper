@@ -6,7 +6,6 @@ Convenience library for using [vmrun](http://www.vmware.com/pdf/vix160_vmrun_com
     guest.start();
     guest.sh("echo 'hello guest!' > /tmp/message-on-guest");
     guest.copyFileToHost("/tmp/message-on-guest", "/tmp/message-on-host");
-
     guest.stop();
 
 Have fun!
