@@ -15,8 +15,8 @@ public class ApiExampleTest
     {
         File tmp = File.createTempFile("java-vmrun-wrapper", ".tmp");
 
-        Guest guest = VMRun.withExecutableAt(new File("/Applications/VMware Fusion.app/Contents/Library/vmrun"))
-                           .createGuest(new File("base-ubuntu.vmwarevm/ubuntu-12.04.vmx"), "atlas", "atlas");
+        Guest guest = VMRun.withExecutableAt("/Applications/VMware Fusion.app/Contents/Library/vmrun")
+                           .createGuest("base-ubuntu.vmwarevm/ubuntu-12.04.vmx", "atlas", "atlas");
 
         guest.start();
         guest.sh("echo 'hello guest!' > /tmp/testFoo");

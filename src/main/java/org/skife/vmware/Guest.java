@@ -53,6 +53,14 @@ public class Guest
         }
     }
 
+    public void copyFileToHost(String guestPath, String hostPath) {
+        copyFileToHost(new File(guestPath), new File(hostPath));
+    }
+
+    public void copyFileToHost(File guestPath, String hostPath) {
+        copyFileToHost(guestPath, new File(hostPath));
+    }
+
     public void copyFileToHost(String guestPath, File hostPath) {
         copyFileToHost(new File(guestPath), hostPath);
     }
