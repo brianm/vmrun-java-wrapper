@@ -14,7 +14,6 @@ import static org.junit.internal.matchers.StringContains.containsString;
 
 public class GuestTest
 {
-
     private static Guest guest;
 
     @BeforeClass
