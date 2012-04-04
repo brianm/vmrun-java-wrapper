@@ -3,7 +3,7 @@
     <groupId>org.skife.vmware</groupId>
     <artifactId>vmrun-java-wrapper</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>vmrun-java-wrapper</name>
     <url>http://github.com/brianm/vmrun-java-wrapper</url>
     <description>
