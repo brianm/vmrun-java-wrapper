@@ -11,6 +11,7 @@ import java.util.Arrays;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assume.assumeThat;
+import static org.skife.vmware.MoreMatchers.fileContentsEqual;
 import static org.skife.vmware.MoreMatchers.fileExists;
 
 public class VMRunTest
@@ -74,6 +75,27 @@ public class VMRunTest
         assertThat(Files.toString(tmp, Charsets.US_ASCII), equalTo("hello guest world\n"));
 
         tmp.delete();
+        vmrun.stop(vmx);
+    }
+
+    @Test
+    public void testCopyFileFromHostToGuest() throws Exception
+    {
+        File tmp = File.createTempFile("vmrun-wrapper", ".tmp");
+        Files.write("hello from host!", tmp, Charsets.UTF_8);
+
+        File round_trip = File.createTempFile("vmrun-wrapper", ".tmp");
+        round_trip.delete();
+
+        vmrun.start(vmx);
+
+        vmrun.copyFileFromHostToGuest(vmx, guestUser, guestPass, tmp, new File("/tmp/from-host"));
+
+        vmrun.copyFileFromGuestToHost(vmx, guestUser, guestPass, new File("/tmp/from-host"), round_trip);
+
+        assertThat(round_trip, fileContentsEqual("hello from host!"));
+
+        vmrun.runScriptInGuest(vmx, guestUser, guestPass, new File("/bin/sh"), "rm /tmp/from-host");
         vmrun.stop(vmx);
     }
 

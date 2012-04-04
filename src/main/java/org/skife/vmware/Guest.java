@@ -1,6 +1,8 @@
 package org.skife.vmware;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Throwables;
+import com.google.common.io.Files;
 
 import java.io.File;
 
@@ -19,17 +21,28 @@ public class Guest
         this.pass = pass;
     }
 
-    public int runScript(File interpreter, String scriptBody)
+    public ProcessResult runScript(File interpreter, String scriptBody)
     {
         try {
-            return vmrun.runScriptInGuest(vmx, user, pass, interpreter, scriptBody);
+
+            File script = File.createTempFile("vmrun", ".sh");
+            File out = File.createTempFile("vmrun", ".out");
+            File err = File.createTempFile("vmrun", ".err");
+            Files.write(scriptBody, script, Charsets.UTF_8);
+
+            copyFileToGuest(script, "/tmp/vmrun-script-helper");
+            int exit = vmrun.runScriptInGuest(vmx, user, pass, interpreter, "sh /tmp/vmrun-script-helper 1> /tmp/vmrun-script-helper-out 2>/tmp/vmrun-script-helper-err" );
+            copyFileToHost("/tmp/vmrun-script-helper-out", out);
+            copyFileToHost("/tmp/vmrun-script-helper-err", err);
+
+            return new ProcessResult(exit, Files.toByteArray(out), Files.toByteArray(err));
         }
         catch (Exception e) {
             throw Throwables.propagate(e);
         }
     }
 
-    public int sh(String scriptlet) {
+    public ProcessResult sh(String scriptlet) {
         return runScript(new File("/bin/sh"), scriptlet);
     }
 
@@ -69,6 +82,21 @@ public class Guest
     {
         try {
             vmrun.copyFileFromGuestToHost(vmx, user, pass, guestPath, hostPath);
+        }
+        catch (Exception e) {
+            throw Throwables.propagate(e);
+        }
+    }
+
+    public void copyFileToGuest(File hostPath, String guestPath)
+    {
+        copyFileToGuest(hostPath, new File(guestPath));
+    }
+
+    public void copyFileToGuest(File hostPath, File guestPath)
+    {
+        try {
+            vmrun.copyFileFromHostToGuest(vmx, user, pass, hostPath, guestPath);
         }
         catch (Exception e) {
             throw Throwables.propagate(e);

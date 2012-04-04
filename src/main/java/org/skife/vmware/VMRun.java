@@ -98,4 +98,16 @@ public class VMRun
             guestPath.getAbsolutePath(),
             hostPath.getAbsolutePath()).explodeOnError();
     }
+
+    public void copyFileFromHostToGuest(File vmx, String guestUser, String guestPass, File hostPath, File guestPath) throws IOException, InterruptedException
+    {
+        run(vmrun.getAbsolutePath(),
+            "-gu", guestUser,
+            "-gp", guestPass,
+            "CopyFileFromHostToGuest",
+            vmx.getAbsolutePath(),
+            hostPath.getAbsolutePath(),
+            guestPath.getAbsolutePath()).explodeOnError();
+
+    }
 }

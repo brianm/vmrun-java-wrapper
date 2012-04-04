@@ -1,15 +1,13 @@
 package org.skife.vmware;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.io.ByteStreams;
+import com.google.common.io.CharStreams;
+import com.google.common.io.Files;
+import com.google.common.io.InputSupplier;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
-
-import static java.util.Arrays.asList;
+import java.io.Reader;
+import java.io.StringReader;
 
 public class ProcessResult
 {
@@ -56,4 +54,13 @@ public class ProcessResult
     {
         return stderr;
     }
+
+    public InputSupplier<? extends Reader> getStdoutSupplier() {
+        return CharStreams.newReaderSupplier(new String(stdout));
+    }
+
+    public InputSupplier<? extends Reader> getStderrSupplier() {
+        return CharStreams.newReaderSupplier(new String(stderr));
+    }
+
 }
