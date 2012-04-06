@@ -36,9 +36,9 @@ public class VMRun
     }
 
 
-    public void start(File vmx) throws IOException, InterruptedException
+    public void start(File vmx, GUI gui) throws IOException, InterruptedException
     {
-        run(vmrun.getAbsolutePath(), "start", vmx.getAbsolutePath(), "nogui").explodeOnError();
+        run(vmrun.getAbsolutePath(), "start", vmx.getAbsolutePath(), gui.commandLineValue()).explodeOnError();
     }
 
 

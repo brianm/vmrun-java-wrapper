@@ -32,7 +32,7 @@ public class VMRunTest
         vmx = new File(System.getProperty("vmx",
                                                "base-ubuntu.vmwarevm/ubuntu-12.04.vmx"));
         vmrun = VMRun.withExecutableAt(execFile);
-        vmrun.start(vmx);
+        vmrun.start(vmx, GUI.YesGUI);
     }
 
 //    @AfterClass

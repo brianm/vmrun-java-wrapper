@@ -46,10 +46,20 @@ public class Guest
         return runScript(new File("/bin/sh"), scriptlet);
     }
 
+    public void startWithGUI()
+    {
+        try {
+            vmrun.start(vmx, GUI.YesGUI);
+        }
+        catch (Exception e) {
+            throw Throwables.propagate(e);
+        }
+    }
+
     public void start()
     {
         try {
-            vmrun.start(vmx);
+            vmrun.start(vmx, GUI.NoGUI);
         }
         catch (Exception e) {
             throw Throwables.propagate(e);
